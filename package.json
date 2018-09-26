@@ -1,0 +1,24 @@
+{
+  "name": "number-display",
+  "version": "1.0.0",
+  "description": "display number smartly",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/entronad/number-display.git"
+  },
+  "keywords": [
+    "number",
+    "display",
+    "trim"
+  ],
+  "author": "LIN Chen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/entronad/number-display/issues"
+  },
+  "homepage": "https://github.com/entronad/number-display#readme"
+}
