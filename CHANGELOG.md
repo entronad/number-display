@@ -9,5 +9,10 @@
 **2018-09-26**
 
 - Change the commafy method from toLocaleString to rgx, as toLocaleString went work in android/safari.
-- put config params in a object
+- Put config params in a object.
 
+## 1.1.1
+
+**2018-09-26**
+
+- Optimize unitfy method.

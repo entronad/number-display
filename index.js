@@ -8,27 +8,28 @@ const commafy = integerStr => {
 }
 
 // [integer, decimal, unit]
-const unitfy = (integerStr, maxAccuracy) => {
+const unitfy = (integerStr) => {
   if (integerStr.length <= 3) {
     return [integerStr, '', '', integerStr.length, integerStr.length];
   }
   if (integerStr.length <= 6) {
     const content = String(Number(integerStr) / 1000).split('.');
-    return [content[0], content[1] ? content[1].slice(0, maxAccuracy) : '', 'k'];
+    return [content[0], content[1] ? content[1] : '', 'k'];
   }
   if (integerStr.length <= 9) {
     const content = String(Number(integerStr) / 1000000).split('.');
-    return [content[0], content[1] ? content[1].slice(0, maxAccuracy) : '', 'M'];
+    return [content[0], content[1] ? content[1] : '', 'M'];
   }
   if (integerStr.length <= 12) {
     const content = String(Number(integerStr) / 1000000000).split('.');
-    return [content[0], content[1] ? content[1].slice(0, maxAccuracy) : '', 'G'];
+    return [content[0], content[1] ? content[1] : '', 'G'];
   }
-  // 16 length integer cant ensure accuracy
   if (integerStr.length <= 15) {
     const content = String(Number(integerStr) / 1000000000000).split('.');
-    return [content[0], content[1] ? content[1].slice(0, maxAccuracy) : '', 'T'];
+    return [content[0], content[1] ? content[1] : '', 'T'];
   }
+  // >= 16 length integer cant ensure accuracy
+  return [1, '', 'E'];
 }
 
 /**
