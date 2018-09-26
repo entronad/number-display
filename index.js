@@ -1,4 +1,11 @@
-const commafy = integerStr => Number(integerStr).toLocaleString();
+const commafy = integerStr => {
+  let commafyStr = integerStr;
+  const rgx = /(\d+)(\d{3})/;
+  while (rgx.test(commafyStr)) {  
+    commafyStr = commafyStr.replace(rgx, '$1' + ',' + '$2');  
+  }
+  return commafyStr;
+}
 
 // [integer, decimal, unit]
 const unitfy = (integerStr, maxAccuracy) => {
@@ -26,16 +33,23 @@ const unitfy = (integerStr, maxAccuracy) => {
 
 /**
  * 
- * @param {*} input max length 16 length integer
- * @param {*} length min 4
- * @param {*} maxAccuracy including unitfy
- * @param {*} placeholder <= length
+ * @param {*} input input variable
+ * @param {number} [length=8] max display char length (must >= 4)
+ * @param {Object} [config] configs
+ * @param {number} [config.maxAccuracy=2] max decimal accuracy
+ * @param {string} [config.placeholder=--] result when non-number
+ * @param {boolean} [config.allowText=true] allow text as results
+ * @param {boolean} [config.comma=true] has commas
  */
 const display = (
   input,
   length = 8,
-  maxAccuracy = 4,
-  placeholder = '--',
+  { // config
+    maxAccuracy = 2,
+    placeholder = '--',
+    allowText = true,
+    comma = true,
+  } = {},
 ) => {
   // placeholder must in length
   if(length < placeholder.length) {
@@ -48,10 +62,22 @@ const display = (
   }
   let inputNum = input;
   if (inputType === 'string') {
-    if (input.trim() === '') {
+    // neither number nor text
+    if (
+      input.trim() === ''
+      || input === 'NaN'
+      || input === 'Infinity'
+      || input === '-Infinity'
+    ) {
       return placeholder;
     }
 
+    // text
+    if (isNaN(input)) {
+      return allowText ? input.slice(0, length) : placeholder;
+    }
+
+    // number
     // str -> num -> str to uniform the number format
     inputNum = Number(input);
   }
@@ -65,7 +91,7 @@ const display = (
   const decimalStr = inputStr.split('.')[1] ? inputStr.split('.')[1].slice(0, maxAccuracy) : '';
 
   // length min is 4
-  const commafyStr = commafy(integerStr);
+  const commafyStr = comma ? commafy(integerStr) : integerStr;
   const commafyMargin = length - signStr.length - commafyStr.length;
   if (commafyMargin >= 2 && decimalStr != '') {
     return `${signStr}${commafyStr}.${decimalStr.slice(0, commafyMargin - 1)}`;

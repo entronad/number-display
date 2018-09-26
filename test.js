@@ -1,6 +1,6 @@
 const display = require('./index');
 
-console.log(display(1000000000));
+console.log(display(1234.123, 4));
 console.log(display(1.00));
 console.log(display(1.12345678));
 console.log(display(123));
@@ -30,6 +30,7 @@ console.log(display(undefined));
 console.log(display([]));
 console.log(display({}));
 console.log(display(new Date()));
+console.log(display((new Date()).toISOString()));
 console.log('---------------------------');
 console.log(display(1000000000, 4));
 console.log(display(1.00, 4));
@@ -48,3 +49,8 @@ console.log(display(-1234, 4));
 console.log(display(-123456789123, 4));
 console.log(display(-12345.43212, 4));
 console.log(display(-1.2345e+5, 4));
+console.log('---------------------------');
+console.log(display(1.22, 8, {maxAccuracy: 1}));
+console.log(display('text', 8, {allowText: false}));
+console.log(display(12345678, 19, {comma: true}));
+console.log(display(12345678, 19, {comma: false}));

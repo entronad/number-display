@@ -1,7 +1,7 @@
 {
   "name": "number-display",
   "version": "1.0.0",
-  "description": "display number smartly",
+  "description": "Display number smartly within a certain length.",
   "main": "index.js",
   "scripts": {
     "test": "node test"
