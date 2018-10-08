@@ -16,3 +16,10 @@
 **2018-09-26**
 
 - Optimize unitfy method.
+
+## 1.2.0
+
+**2018-09-26**
+
+- add units config params.
+- deal overflow with placeholder

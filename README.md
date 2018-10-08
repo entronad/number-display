@@ -34,19 +34,23 @@ import display from 'number-display';
 // result = display(input, length, config)
 // config: {maxAccuracy, placeholder, allowText}
 
-console.log(display(1234.123));                   // 1,234.12
-console.log(display(1234.123, 4));                // 1.2k
-console.log(display('1000000000'));               // 1G
-console.log(display(-1.2345e+5));                 // -123,450
-console.log(display(NaN));                        // --
-console.log(display(''));                         // --
-console.log(display(new Date()));                 // --
-console.log(display((new Date()).toISOString())); // 2018-09-
+display(1234.123)                   // 1,234.12
+display(1234.123, 4)                // 1.2k
+display('1000000000')               // 1G
+display(-1.2345e+5)                 // -123,450
+display(NaN)                        // --
+display('')                         // --
+display(new Date())                 // --
+display((new Date()).toISOString()) // 2018-09-
 
-console.log(display(NaN, 2, {placeholder: '**'}));// **
-console.log(display(1.22, 8, {maxAccuracy: 0}));  // 1.2
-console.log(display('text', 8, {allowText: false}));  // --
-console.log(display(12345678, 19, {comma: false}));// 12345678
+display(NaN, 2, {placeholder: '**'})     // **
+display(1.22, 8, {maxAccuracy: 0})       // 1.2
+display('text', 8, {allowText: false})   // --
+display(12345678, 19, {comma: false})    // 12345678
+
+display(1234567867, 8, {unitsMaxAccuracy: 2})                           // 1.23G
+display(12345, 4, {units: ['t', 'h', 'k', 'tk'], unitsInterval: 1})     // 1tk
+display(123457777, 4, {units: ['t', 'h', 'k', 'tk'], unitsInterval: 1}) // --
 
 ```
 
@@ -87,6 +91,24 @@ The max length the result would be. length should no less then 4 so that any num
   ( default: true )
 
   Whether the locale string has commas ( 1,234,222 ).
+
+- **units**
+
+  (defult: ['k', 'M', 'G', 'T'])
+
+  Units for result number after compressed, start with lowest one, which is for 1*unitInterval compression. If number is greater than the highest unit can display , it will return placeholder.
+
+- **unitInterval**
+
+  (defult: 3)
+
+  The interval figures between each units. If units is defult ['k', 'M', 'G', 'T'], unitInterval should be defult 3.
+
+- **unitMaxAccuracy**
+
+  (defult: 4)
+
+  The max accuracy when displayed with units.
 
 # Change Log
 

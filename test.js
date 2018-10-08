@@ -54,3 +54,8 @@ console.log(display(1.22, 8, {maxAccuracy: 1}));
 console.log(display('text', 8, {allowText: false}));
 console.log(display(12345678, 19, {comma: true}));
 console.log(display(12345678, 19, {comma: false}));
+console.log('---------------------------');
+console.log(display(1234567867, 8, {units: ['w', 'y'], unitsInterval: 4}));
+console.log(display(1234567867, 8, {unitsMaxAccuracy: 2}));
+console.log(display(12345, 4, {units: ['t', 'h', 'k', 'tk'], unitsInterval: 1}));
+console.log(display(123457777, 4, {units: ['t', 'h', 'k', 'tk'], unitsInterval: 1}));

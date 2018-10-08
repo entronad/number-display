@@ -8,28 +8,17 @@ const commafy = integerStr => {
 }
 
 // [integer, decimal, unit]
-const unitfy = (integerStr) => {
-  if (integerStr.length <= 3) {
+const unitfy = (integerStr, units, unitsInterval, unitsMaxAccuracy) => {
+  if (integerStr.length <= unitsInterval) {
     return [integerStr, '', '', integerStr.length, integerStr.length];
   }
-  if (integerStr.length <= 6) {
-    const content = String(Number(integerStr) / 1000).split('.');
-    return [content[0], content[1] ? content[1] : '', 'k'];
+  for (let i = 0; i < units.length; i++) {
+    if (integerStr.length <= (i + 2) * unitsInterval) {
+      const content = String(Number(integerStr) / Math.pow(10, (i + 1) * unitsInterval)).split('.');
+      return [content[0], content[1] ? content[1].slice(0, unitsMaxAccuracy) : '', units[i]];
+    }
   }
-  if (integerStr.length <= 9) {
-    const content = String(Number(integerStr) / 1000000).split('.');
-    return [content[0], content[1] ? content[1] : '', 'M'];
-  }
-  if (integerStr.length <= 12) {
-    const content = String(Number(integerStr) / 1000000000).split('.');
-    return [content[0], content[1] ? content[1] : '', 'G'];
-  }
-  if (integerStr.length <= 15) {
-    const content = String(Number(integerStr) / 1000000000000).split('.');
-    return [content[0], content[1] ? content[1] : '', 'T'];
-  }
-  // >= 16 length integer cant ensure accuracy
-  return [1, '', 'E'];
+  return null;
 }
 
 /**
@@ -40,7 +29,10 @@ const unitfy = (integerStr) => {
  * @param {number} [config.maxAccuracy=2] max decimal accuracy
  * @param {string} [config.placeholder=--] result when non-number
  * @param {boolean} [config.allowText=true] allow text as results
- * @param {boolean} [config.comma=true] has commas
+ * @param {boolean} [config.comma=true] with commas in results
+ * @param {Array} [config.units=true] array of number units
+ * @param {number} [config.unitsInterval=true] figures of each unit
+ * @param {number} [config.unitsMaxAccuracy=true] max decimal accuracy while display with units
  */
 const display = (
   input,
@@ -50,6 +42,9 @@ const display = (
     placeholder = '--',
     allowText = true,
     comma = true,
+    units = ['k', 'M', 'G', 'T'],
+    unitsInterval = 3,
+    unitsMaxAccuracy = 4,
   } = {},
 ) => {
   // placeholder must in length
@@ -101,8 +96,11 @@ const display = (
     return `${signStr}${commafyStr}`;
   }
   // unitfy has no decimal
-  const unitfyInfo = unitfy(integerStr);
-  const unitfyMargin = length - signStr.length - unitfyInfo[0].length - 1;
+  const unitfyInfo = unitfy(integerStr, units, unitsInterval, unitsMaxAccuracy);
+  if (unitfyInfo == null) {
+    return placeholder;
+  }
+  const unitfyMargin = length - signStr.length - unitfyInfo[0].length - unitfyInfo[2].length;
   if (unitfyMargin >= 2 && unitfyInfo[1] != '') {
     return `${signStr}${unitfyInfo[0]}.${unitfyInfo[1].slice(0, unitfyMargin -1)}${unitfyInfo[2]}`
   }
