@@ -10,7 +10,7 @@ const commafy = integerStr => {
 // [integer, decimal, unit]
 const unitfy = (integerStr, units, unitsInterval, unitsMaxAccuracy) => {
   if (integerStr.length <= unitsInterval) {
-    return [integerStr, '', '', integerStr.length, integerStr.length];
+    return [integerStr, '', ''];
   }
   for (let i = 0; i < units.length; i++) {
     if (integerStr.length <= (i + 2) * unitsInterval) {
