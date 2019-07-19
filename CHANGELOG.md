@@ -21,5 +21,11 @@
 
 **2018-09-26**
 
-- add units config params.
-- deal overflow with placeholder
+- Add units config params.
+- Deal overflow with placeholder.
+
+## 1.2.1
+
+**2019-02-07**
+
+- Fix unitfy retrun array.
