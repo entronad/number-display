@@ -4,6 +4,8 @@
 
 
 
+
+
 是用来处理未知情况的，所以可转换为可处理数值（正则判断）的都会处理，本质上是在number -> string 过程添加了一道，但添加一条规则 null undefined nan系列会换为placeholder（placeholder超长了也截取）
 
 1 非string number类型的一律placeholder
@@ -49,3 +51,7 @@ MAX_SAFE_INTEGER 是一个值为 9007199254740991的常量
 分为localeSeparator, localeUnits, localeSpan,是关联的
 
 直接对localeInt操作
+
+
+
+单位，分隔符，单位长度都沿用英语的kMG体系
