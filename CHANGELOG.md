@@ -29,3 +29,11 @@
 **2019-02-07**
 
 - Fix unitfy retrun array.
+
+## 2.0.0
+
+**2019-07-25**
+
+- Simplify APIs, details in README.md.
+- Optimize performance.
+- Add unit test.
