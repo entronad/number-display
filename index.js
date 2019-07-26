@@ -27,7 +27,7 @@ const createDisplay = ({
   value = String(value);
   const cells = value.match(/^(-?)(\d*)(\.(\d+))?$/);
 
-  if (!cells) {
+  if (!cells || value === '' || value === '-') {
     return allowText ? value.slice(0, length) : placeholder;
   }
 

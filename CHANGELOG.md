@@ -37,3 +37,10 @@
 - Simplify APIs, details in README.md.
 - Optimize performance.
 - Add unit test.
+
+## 2.0.1
+
+**2019-07-26**
+
+- Fix wrong return of '' and '-'.
+

@@ -22,12 +22,6 @@ To display data in a width-limited component, this function will smartly help yo
 yarn add number-display
 ```
 
-or
-
-```
-npm i number-display --save
-```
-
 ## Usage
 
 In version 2.\* we only export a `createDisplay` function for users to custom their `display` function. So the real display function has only one input: `value` . This separates the configuration and usage, which is more simple and clear.

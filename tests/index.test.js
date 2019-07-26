@@ -31,6 +31,11 @@ describe('test', () => {
 
     expect(display('-1.2345e+5')).toBe('-1.2345e+');
     expect(display('NaN')).toBe('NaN');
+
+    expect(display('.34')).toBe('0.34');
+    expect(display(.34)).toBe('0.34');
+    expect(display('-.34')).toBe('-0.34');
+    expect(display(-.34)).toBe('-0.34');
   });
 
   it('placeholder allowText comma', () => {
@@ -46,6 +51,18 @@ describe('test', () => {
     expect(display('abcdefghijklmn')).toBe('--');
 
     expect(display(123456)).toBe('123456');
+
+    const displayText = createDisplay({
+      allowText: true,
+      comma: false,
+      placeholder: '--'
+    });
+
+    // special string for the regexp
+    expect(display('')).toBe('--');
+    expect(displayText('')).toBe('');
+    expect(display('-')).toBe('--');
+    expect(displayText('-')).toBe('-');
   });
 
   it('length decimal', () => {
