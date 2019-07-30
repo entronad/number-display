@@ -34,16 +34,19 @@ const createDisplay = ({
   const negative = cells[1];
   const int = cells[2] || '0';
   const localeInt = int.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  const deci = (cells[4] || '').slice(0, decimal).replace(/0+$/, '');
+  const deci = (cells[4] || '').slice(0, decimal);
 
   let currentLen = negative.length + localeInt.length + 1 + deci.length;
+  let deciShow;
   if (comma && currentLen <= length) {
-    return `${negative}${localeInt}${deci && '.'}${deci}`;
+    deciShow = deci.replace(/0+$/, '');
+    return `${negative}${localeInt}${deciShow && '.'}${deciShow}`;
   }
 
   let space = length - negative.length - int.length;
   if (space >= 2) {
-    return `${negative}${int}${deci && '.'}${deci.slice(0, space - 1)}`;
+    deciShow = deci.slice(0, space - 1).replace(/0+$/, '');
+    return `${negative}${int}${deciShow && '.'}${deciShow}`;
   }
   if (space >= 0) {
     return `${negative}${int}`;
@@ -52,12 +55,13 @@ const createDisplay = ({
   const sections = localeInt.split(',');
   if (sections.length > 1) {
     const mainSection = sections[0];
-    const tailSection = sections.slice(1).join();
+    const tailSection = sections.slice(1).join('');
     const units = ['k', 'M', 'G', 'T', 'P'];
     const unit = units[sections.length - 2];
     space = length - negative.length - mainSection.length - 1;
     if (space >= 2) {
-      return `${negative}${mainSection}.${tailSection.slice(0, space - 1)}${unit}`;
+      const tailShow = tailSection.slice(0, space - 1).replace(/0+$/, '');
+      return `${negative}${mainSection}${tailShow && '.'}${tailShow}${unit}`;
     }
     if (space >= 0) {
       return `${negative}${mainSection}${unit}`;

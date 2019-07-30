@@ -49,3 +49,9 @@
 **2019-07-30**
 
 - Remove decimal trailing zeros.
+
+## 2.0.3
+
+**2019-07-30**
+
+- Fix decimal trailing zeros with units.

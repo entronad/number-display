@@ -31,8 +31,11 @@ describe('test', () => {
     expect(display('123.000')).toBe('123');
     expect(display(123.000)).toBe('123');
     expect(display(23.008)).toBe('23');
+    expect(display(1234567.08)).toBe('1234567');
+    expect(display(100000000000)).toBe('100G');
 
     expect(display(-1.2345e+5)).toBe('-123,450');
+    expect(display(-1.23458e+5)).toBe('-123,458');
 
     expect(display('-1.2345e+5')).toBe('-1.2345e+');
     expect(display('NaN')).toBe('NaN');
