@@ -10,11 +10,12 @@ display(-254623933.876)    // result: -254.62M
 To display data in a width-limited component, this function will smartly help you to convert number to a certain chart length. To be **simple**, **plain**, **flexible** and **accurate**, the conversion follow this rules:
 
 - result chart length will never overflow length
-- filter null or wrong type inputs ( null/NaN/object ) to placeholder
+- replace null or wrong type inputs ( null/NaN/object ) to placeholder
 - use locale string with commas ( 1,234,222 ) as possible ( configurable )
 - trim number with units ( 1.23k ) when length is limited
 - convert scientific notation ( 1.23e+4 ) to friendly form
 - directly return input text if allowed
+- no decimal trailing zeros
 
 ## Install
 
@@ -95,7 +96,7 @@ The max length the result would be. length should no less then 5 so that any num
 
 ( default: 2 )
 
-The max decimal precision. The final precision will be calculated by length, and less than this param.
+The max decimal length. Note that this is only a constraint. The final precision will be calculated by length, and less than this param. There will be no decimal trailing zeros.
 
 **placeholder**
 

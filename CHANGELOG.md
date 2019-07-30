@@ -44,3 +44,8 @@
 
 - Fix wrong return of '' and '-'.
 
+## 2.0.2
+
+**2019-07-30**
+
+- Remove decimal trailing zeros.

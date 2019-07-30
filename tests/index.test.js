@@ -25,8 +25,13 @@ describe('test', () => {
     expect(display(123.456)).toBe('123.45');
     expect(display('123.4')).toBe('123.4');
     expect(display('12345678.9')).toBe('12345678');
-    expect(display('123.0')).toBe('123.0');
-    expect(display('123.000')).toBe('123.00');
+
+    expect(display('123.0')).toBe('123');
+    expect(display(123.0)).toBe('123');
+    expect(display('123.000')).toBe('123');
+    expect(display(123.000)).toBe('123');
+    expect(display(23.008)).toBe('23');
+
     expect(display(-1.2345e+5)).toBe('-123,450');
 
     expect(display('-1.2345e+5')).toBe('-1.2345e+');
@@ -76,6 +81,8 @@ describe('test', () => {
     expect(display(1.2222)).toBe('1.2222');
     expect(display(-111.2222)).toBe('-111.2');
 
+    expect(display(23.008)).toBe('23.008');
+
     const display1 = createDisplay({ length: 8 });
     expect(display1(-254623933.876)).toBe('-254.62M');
   });
@@ -86,8 +93,8 @@ describe('test', () => {
       decimal: 0,
     });
 
-    expect(display(1234.0)).toBe('1,234');
-    expect(display(123456.0)).toBe('123456');
+    expect(display(1234.8)).toBe('1,234');
+    expect(display(123456.8)).toBe('123456');
   });
 
   it('length too short', () => {

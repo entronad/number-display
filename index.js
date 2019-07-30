@@ -34,7 +34,7 @@ const createDisplay = ({
   const negative = cells[1];
   const int = cells[2] || '0';
   const localeInt = int.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  const deci = (cells[4] || '').slice(0, decimal);
+  const deci = (cells[4] || '').slice(0, decimal).replace(/0+$/, '');
 
   let currentLen = negative.length + localeInt.length + 1 + deci.length;
   if (comma && currentLen <= length) {
