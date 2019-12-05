@@ -55,3 +55,18 @@
 **2019-07-30**
 
 - Fix decimal trailing zeros with units.
+
+## 2.1.0
+
+**2019-12-02**
+
+- Add feature: roundingType. Now you can set the way to round the decimal in 'round', 'floor' or 'ceil', witch default to 'round'.
+- When the length is too small, number-display will return the origin value as a string, instead of throwing an error.
+
+## 2.1.1
+
+**2019-12-05**
+
+- Change param decimal name to 'precision', and default to equal to param length, witch means no additional limit.
+- Opt the rounding function.
+- Change param comma name to 'separator'.

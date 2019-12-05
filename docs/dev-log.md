@@ -69,3 +69,7 @@ length 默认值设为9，是为-9,999.99能原值显示，再大一般会变换
 小数末尾的0都去掉（包括小数只有.0）的情况
 
 因为1，展示的数字不代表int和double类型的区分，2计算机中数值类型本身就不带多个0，js数字类型中连.0都没有，3.本函数的dicimal位数本身就不代表绝对的精度（优先级低于trimming）
+
+
+
+目前的rounding方法，当intStr + decimalLength很大时，dart中的int会溢出，特别是decimalLength的默认值很大，加个判断，只有decimalstr  > decimalLength 时才执行（提示效率），同时intStr + decimalLength不能很大否则直接切割，杜绝decimalLength的默认值很大的情况，这样只有在length很大，实际值也很大的时候才会有问题

@@ -9,12 +9,13 @@ display(-254623933.876)    // result: -254.62M
 
 To display data in a width-limited component, this function will smartly help you to convert number to a certain chart length. To be **simple**, **plain**, **flexible** and **accurate**, the conversion follow this rules:
 
-- result chart length will never overflow length
+- result char length will never overflow length, unless the length setting is too small(< 5).
 - replace null or wrong type inputs ( null/NaN/object ) to placeholder
 - use locale string with commas ( 1,234,222 ) as possible ( configurable )
 - trim number with units ( 1.23k ) when length is limited
 - convert scientific notation ( 1.23e+4 ) to friendly form
 - directly return input text if allowed
+- when omitting decimals, you can change the rounding type, default to 'round'
 - no decimal trailing zeros
 
 ## Install
@@ -58,7 +59,7 @@ NaN => ''
 
 'abcdefghijklmn' => 'abcdefghi'
 
--123456789.123456789 => '-123.456M'
+-123456789.123456789 => '-123.457M'
 '123456' => '123,456'
 -1.2345e+5 => '-123,450'
 ```
@@ -75,7 +76,7 @@ With some configs:
 ```
 createDisplay({
   allowText: false,
-  comma: false,
+  separator: false,
   placeholder: '--'
 });
 
@@ -92,11 +93,11 @@ null => '--'
 
 The max length the result would be. length should no less then 5 so that any number can display ( say -123000 ) after trim.
 
-**decimal**
+**precision**
 
-( default: 2 )
+( default: equals to 'length' )
 
-The max decimal length. Note that this is only a constraint. The final precision will be calculated by length, and less than this param. There will be no decimal trailing zeros.
+The max decimal length. Note that this is only a constraint. The final precision will be calculated by length, and less than this param. This param is the same as 'length' by default, witch means no additional limit.  There will be no decimal trailing zeros.
 
 **placeholder**
 
@@ -110,8 +111,14 @@ The result when the input is neither string nor number, or the input is NaN, Inf
 
 Allow *Text* ( String that cant convert to number) as input and result. It will be sliced within length param. If false , result of text will be placeholder. Note that some special form will be regarded as text like 'NaN', '-1.2345e+5'.
 
-**comma**
+**separator**
 
 ( default: true )
 
 Whether the locale string has commas ( 1,234,222 ), if there are rooms.
+
+**roundingType**
+
+( default: 'round' )
+
+The rounding type when omitting decimals, enum in 'round', 'floor' or 'ceil'.
