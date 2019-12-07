@@ -70,3 +70,10 @@
 - Change param decimal name to 'precision', and default to equal to param length, witch means no additional limit.
 - Opt the rounding function.
 - Change param comma name to 'separator'.
+
+## 2.1.2
+
+**2019-12-07**
+
+- Change back param precision name to 'decimal', to avoid confusion with the common 'toPrecision' meaning.
+- Add inner precision limit to avoid float error.

@@ -1,43 +1,6 @@
 const createDisplay = require('..');
 
 describe('test', () => {
-  it('rounding function', () => {
-    const maxDoubleLength = 16;
-    const rounding = (intStr, decimalStr, decimalLength, type) => {
-      if (decimalStr.length <= decimalLength) {
-        return [intStr || '', decimalStr || ''];
-      }
-      if (intStr.length + decimalLength > maxDoubleLength) {
-        return [intStr || '', (decimalStr || '').slice(0, decimalLength)];
-      }
-      decimalLength = Math.max(decimalLength, 0);
-      const handler = type === 'ceil' ? Math.ceil : (type === 'floor' ? Math.floor : Math.round);
-      const rstStrs =
-        String(handler(`${intStr}.${decimalStr}e${decimalLength}`) / Math.pow(10, decimalLength)).split('.');
-      return [rstStrs[0] || '', rstStrs[1] || ''];
-    }
-
-    expect(rounding('123', '456', 2, 'round')).toStrictEqual(['123', '46']);
-    expect(rounding('123', '756', 0, 'round')).toStrictEqual(['124', '']);
-    expect(rounding('123', '456', 2)).toStrictEqual(['123', '46']);
-    expect(rounding('123', '456', 5)).toStrictEqual(['123', '456']);
-    expect(rounding('123', '9999', 3)).toStrictEqual(['124', '']);
-    expect(rounding('123', '001', 2)).toStrictEqual(['123', '']);
-    expect(rounding('123', '005', 2)).toStrictEqual(['123', '01']);
-
-    expect(rounding('123', '9999', 3, 'floor')).toStrictEqual(['123', '999']);
-    expect(rounding('123', '9999', 0, 'floor')).toStrictEqual(['123', '']);
-    expect(rounding('123', '005', 2, 'floor')).toStrictEqual(['123', '']);
-
-    expect(rounding('123', '4501', 2, 'ceil')).toStrictEqual(['123', '46']);
-    expect(rounding('123', '4511', 2, 'ceil')).toStrictEqual(['123', '46']);
-    expect(rounding('123', '45', 2, 'ceil')).toStrictEqual(['123', '45']);
-    expect(rounding('123', '01', 0, 'ceil')).toStrictEqual(['124', '']);
-
-    expect(rounding('123', '756', -1, 'round')).toStrictEqual(['124', '']);
-    expect(rounding('123', '9999', -10, 'floor')).toStrictEqual(['123', '']);
-  });
-
   it('default display', () => {
     const display = createDisplay();
 
@@ -84,9 +47,9 @@ describe('test', () => {
   });
 
   it('rounding', () => {
-    const displayRound = createDisplay({roundingType: 'round', precision: 2});
-    const displayFloor = createDisplay({roundingType: 'floor', precision: 2});
-    const displayCeil = createDisplay({roundingType: 'ceil', precision: 2});
+    const displayRound = createDisplay({roundingType: 'round', decimal: 2});
+    const displayFloor = createDisplay({roundingType: 'floor', decimal: 2});
+    const displayCeil = createDisplay({roundingType: 'ceil', decimal: 2});
 
     expect(displayRound(23.008)).toBe('23.01');
     expect(displayFloor(23.008)).toBe('23');
@@ -127,7 +90,7 @@ describe('test', () => {
   it('length decimal', () => {
     const display = createDisplay({
       length: 6,
-      precision: 10,
+      decimal: 10,
     });
 
     expect(display(123456)).toBe('123456');
@@ -144,7 +107,7 @@ describe('test', () => {
   it('int', () => {
     const display = createDisplay({
       length: 6,
-      precision: 0,
+      decimal: 0,
     });
 
     expect(display(1234.8)).toBe('1,235');
@@ -160,5 +123,18 @@ describe('test', () => {
     expect(display(null)).toBe('abc');
 
     expect(display(-123456)).toBe('-123456');
+  });
+
+  it('float precision', () => {
+    const display = createDisplay({
+      length: 30,
+      decimal: 30,
+      separator: false,
+    });
+
+    expect(display(0.1 + 0.2)).toBe('0.3');
+    expect(display(0.9999999999999)).toBe('1');
+    expect(display('12345678.12345678')).toBe('12345678.1235');
+    expect(display('44444444444444')).toBe('44444444444400');
   });
 });

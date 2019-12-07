@@ -1,13 +1,10 @@
-const maxDoubleLength = 16;
+const maxPrecision = 12;
 
 const rounding = (intStr, decimalStr, decimalLength, type) => {
   if (decimalStr.length <= decimalLength) {
     return [intStr || '', decimalStr || ''];
   }
-  if (intStr.length + decimalLength > maxDoubleLength) {
-    return [intStr || '', (decimalStr || '').slice(0, decimalLength)];
-  }
-  decimalLength = Math.max(decimalLength, 0);
+  decimalLength = Math.max(Math.min(decimalLength, maxPrecision - intStr.length), 0);
   const handler = type === 'ceil' ? Math.ceil : (type === 'floor' ? Math.floor : Math.round);
   const rstStrs =
     String(handler(`${intStr}.${decimalStr}e${decimalLength}`) / Math.pow(10, decimalLength)).split('.');
@@ -18,7 +15,7 @@ const rounding = (intStr, decimalStr, decimalLength, type) => {
  * Create a display function with configs. The function returned converts the value.
  * 
  * @param {number} [length] max display char length (better >= 5 to allow any number); default 9
- * @param {number} [precision] max decimal precision; default equals length
+ * @param {number} [decimal] max decimal precision; default equals length
  * @param {string} [placeholder] result when neither number nor text; default ''
  * @param {boolean} [allowText] allow text as results, if false text will convert to placeholder, text will be slice within length param; default true
  * @param {boolean} [separator] show commas between digits in group of 3, if there are rooms; default true
@@ -26,14 +23,14 @@ const rounding = (intStr, decimalStr, decimalLength, type) => {
  */
 const createDisplay = ({
   length = 9,
-  precision,
+  decimal,
   placeholder = '',
   allowText = true,
   separator = true,
   roundingType = 'round',
 } = {}) => value => {
-  if (precision == null) {
-    precision = length;
+  if (decimal == null) {
+    decimal = length;
   }
   placeholder = placeholder.slice(0, length);
   const type = typeof value;
@@ -46,14 +43,17 @@ const createDisplay = ({
   }
 
   value = String(value);
-  const cells = value.match(/^(-?)(\d*)(\.(\d+))?$/);
+  let cells = value.match(/^(-?)(\d*)(\.(\d+))?$/);
 
   if (!cells || value === '' || value === '-') {
     return allowText ? value.slice(0, length) : placeholder;
   }
 
+  preciseValue = String(parseFloat(parseFloat(value).toPrecision(maxPrecision)));
+  cells = preciseValue.match(/^(-?)(\d*)(\.(\d+))?$/);
+
   const negative = cells[1];
-  let [int, deci] = rounding(cells[2] || '0', cells[4] || '', precision, roundingType);
+  let [int, deci] = rounding(cells[2] || '0', cells[4] || '', decimal, roundingType);
   const localeInt = int.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   
   let currentLen = negative.length + localeInt.length + 1 + deci.length;

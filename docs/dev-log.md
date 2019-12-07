@@ -73,3 +73,15 @@ length 默认值设为9，是为-9,999.99能原值显示，再大一般会变换
 
 
 目前的rounding方法，当intStr + decimalLength很大时，dart中的int会溢出，特别是decimalLength的默认值很大，加个判断，只有decimalstr  > decimalLength 时才执行（提示效率），同时intStr + decimalLength不能很大否则直接切割，杜绝decimalLength的默认值很大的情况，这样只有在length很大，实际值也很大的时候才会有问题
+
+
+
+浮点数精度问题所以限制数字的有效数字不能超过12，故传入rounding方法时，decimalLength不能超过12-intStr
+
+rounding方法里有了，外面parseFloat(value).toPrecision(maxPrecision)以应对纯整数的情况
+
+因为外面的转换已经保证了里面的精度不超过12，rounding在第一步时不处理此种情况
+
+
+
+首次取正则和判断正则还是要分开，以处理3.14some non-digit characters的情况
