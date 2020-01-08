@@ -7,23 +7,17 @@ const display = createDisplay({ length: 8 });
 display(-254623933.876)    // result: -254.62M
 ```
 
-To display data in a width-limited component, this function will smartly help you to convert number to a certain chart length. To be **simple**, **plain**, **flexible** and **accurate**, the conversion follow this rules:
+The conversion follow this rules:
 
-- result char length will never overflow length, unless the length setting is too small(< 5).
-- replace null or wrong type inputs ( null/NaN/object ) to placeholder
+- result char length will never overflow `length` .
+- replace null or wrong type inputs ( undefined / NaN / object ) to placeholder
 - use locale string with commas ( 1,234,222 ) as possible ( configurable )
 - trim number with units ( 1.23k ) when length is limited
 - convert scientific notation ( 1.23e+4 ) to friendly form
-- directly return input text if allowed
+- directly return input text if ( configurable )
 - when omitting decimals, you can change the rounding type, default to 'round'
 - no decimal tailing zeros
 - no float error
-
-**Blogs**:
-
-[En](https://medium.com/front-end-weekly/displaying-numbers-in-frontend-2336323493c2) 
-
-[中文](https://zhuanlan.zhihu.com/p/85536865) 
 
 ## Install
 
@@ -33,7 +27,9 @@ yarn add number-display
 
 ## Usage
 
-In version 2.\* we only export a `createDisplay` function for users to custom their `display` function. So the real display function has only one input: `value` . This separates the configuration and usage, which is more simple and clear.
+*We have built-in types, so Typescript is supported*
+
+We only export a `createDisplay` function for users to custom their `display` function. So the real display function has only one input: `value` . This separates the configuration and usage, which is more simple and clear.
 
 ```
 import createDisplay from 'number-display';
@@ -98,7 +94,7 @@ null => '--'
 
 ( default: 9 )
 
-The max length the result would be. length should no less then 5 so that any number can display ( say -123000 ) after trim.
+The max length the result would be. length should be longer then 5 so that any number can display ( say -123000 ) after trim, or you may get a console warning and length overflow.
 
 **decimal**
 
@@ -129,3 +125,9 @@ Whether the locale string has commas ( 1,234,222 ), if there are rooms.
 ( default: 'round' )
 
 The rounding type when omitting decimals, enum in 'round', 'floor' or 'ceil'.
+
+## Blogs
+
+[En](https://medium.com/front-end-weekly/displaying-numbers-in-frontend-2336323493c2) 
+
+[中文](https://zhuanlan.zhihu.com/p/85536865) 

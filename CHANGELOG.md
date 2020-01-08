@@ -77,3 +77,10 @@
 
 - Change back param precision name to 'decimal', to avoid confusion with the common 'toPrecision' meaning.
 - Add inner precision limit to avoid float error.
+
+## 2.2.0
+
+**2020-01-08**
+
+- Add built-in types for Typescript.
+- Update license to 2020.

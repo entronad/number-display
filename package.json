@@ -1,8 +1,9 @@
 {
   "name": "number-display",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "Display number smartly within a certain length.",
   "main": "index.js",
+  "types": "index.d.ts",
   "files": [
     "index.js"
   ],
