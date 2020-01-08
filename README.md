@@ -1,4 +1,7 @@
+[中文](https://github.com/entronad/number-display/blob/master/README_CN.md) 
+
 # number-display
+
 *Display number smartly within a certain length.*
 
 ```
@@ -14,10 +17,12 @@ The conversion follow this rules:
 - use locale string with commas ( 1,234,222 ) as possible ( configurable )
 - trim number with units ( 1.23k ) when length is limited
 - convert scientific notation ( 1.23e+4 ) to friendly form
-- directly return input text if ( configurable )
+- directly return input text if allowed ( configurable )
 - when omitting decimals, you can change the rounding type, default to 'round'
 - no decimal tailing zeros
 - no float error
+
+It also has a [Dart version](https://github.com/entronad/number_display) .
 
 ## Install
 
@@ -60,8 +65,6 @@ null => ''
 NaN => ''
 {} => ''
 
-'abcdefghijklmn' => 'abcdefghi'
-
 -123456789.123456789 => '-123.457M'
 '123456' => '123,456'
 -1.2345e+5 => '-123,450'
@@ -84,7 +87,7 @@ createDisplay({
 });
 
 null => '--'
-'abcdefghijklmn' => '--'
+'abcdefghijklmn' => 'abcdefghi'
 123456 => '123456'
 ```
 
@@ -110,7 +113,7 @@ The result when the input is neither string nor number, or the input is NaN, Inf
 
 **allowText**
 
-( default: true )
+( default: false )
 
 Allow *Text* ( String that cant convert to number) as input and result. It will be sliced within length param. If false , result of text will be placeholder. Note that some special form will be regarded as text like 'NaN', '-1.2345e+5'.
 

@@ -96,3 +96,9 @@
 **2020-01-08**
 
 - Fix config params to be optional in index.d.ts.
+
+## 2.2.3
+
+**2020-01-08**
+
+- `allowText` default to false, to prevent unexpected result of input `''`.

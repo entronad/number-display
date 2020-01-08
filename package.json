@@ -1,6 +1,6 @@
 {
   "name": "number-display",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "Display number smartly within a certain length.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/entronad/number-display#readme",
   "devDependencies": {
-    "jest": "^24.8.0"
+    "jest": "^24.9.0"
   },
   "jest": {
     "testRegex": "(/tests/.*\\.test\\.js)$"

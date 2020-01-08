@@ -2,7 +2,7 @@ const createDisplay = require('../lib');
 
 describe('test', () => {
   it('default display', () => {
-    const display = createDisplay();
+    const display = createDisplay({ allowText: true });
 
     expect(display(null)).toBe('');
     expect(display(undefined)).toBe('');
@@ -62,7 +62,6 @@ describe('test', () => {
 
   it('placeholder allowText separator', () => {
     const display = createDisplay({
-      allowText: false,
       separator: false,
       placeholder: '--'
     });
