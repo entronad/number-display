@@ -1,11 +1,11 @@
 {
   "name": "number-display",
-  "version": "2.2.0",
+  "version": "2.2.2",
   "description": "Display number smartly within a certain length.",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
-    "index.js"
+    "lib"
   ],
   "scripts": {
     "test": "jest"
@@ -19,7 +19,8 @@
     "string",
     "display",
     "trim",
-    "convert"
+    "convert",
+    "typescript"
   ],
   "author": "LIN Chen",
   "license": "MIT",

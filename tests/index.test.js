@@ -1,4 +1,4 @@
-const createDisplay = require('..');
+const createDisplay = require('../lib');
 
 describe('test', () => {
   it('default display', () => {

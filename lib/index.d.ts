@@ -17,11 +17,11 @@ export default function createDisplay({
   allowText,
   separator,
   roundingType,
-}: {
-  length: number,
-  decimal: number,
-  placeholder: string,
-  allowText: boolean,
-  separator: boolean,
-  roundingType: 'round' | 'floor' | 'ceil',
+}?: {
+  length?: number,
+  decimal?: number,
+  placeholder?: string,
+  allowText?: boolean,
+  separator?: boolean,
+  roundingType?: 'round' | 'floor' | 'ceil',
 }): (value: any) => string;
