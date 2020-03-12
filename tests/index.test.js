@@ -62,7 +62,7 @@ describe('test', () => {
 
   it('placeholder allowText separator', () => {
     const display = createDisplay({
-      separator: false,
+      separator: null,
       placeholder: '--'
     });
 
@@ -75,7 +75,7 @@ describe('test', () => {
 
     const displayText = createDisplay({
       allowText: true,
-      separator: false,
+      separator: null,
       placeholder: '--'
     });
 
@@ -128,12 +128,53 @@ describe('test', () => {
     const display = createDisplay({
       length: 30,
       decimal: 30,
-      separator: false,
+      separator: null,
     });
 
     expect(display(0.1 + 0.2)).toBe('0.3');
     expect(display(0.9999999999999)).toBe('1');
     expect(display('12345678.12345678')).toBe('12345678.1235');
     expect(display('44444444444444')).toBe('44444444444400');
+  });
+
+  it('seporator', () => {
+    const display = createDisplay({
+      length: 30,
+      decimal: 30,
+      separator: '_',
+    });
+
+    expect(display('12345678')).toBe('12_345_678');
+
+    const display2 = createDisplay({
+      length: 30,
+      decimal: 30,
+      separator: '___',
+    });
+
+    expect(display2('12345678')).toBe('12_345_678');
+  });
+
+  it('units', () => {
+    const display = createDisplay({
+      length: 8,
+      units: null,
+    });
+
+    expect(display(-254623933.876)).toBe('-254.62M');
+
+    const display1 = createDisplay({
+      length: 8,
+      units: [],
+    });
+    
+    expect(display1(-254623933.876)).toBe('-254.62M');
+
+    const display2 = createDisplay({
+      length: 8,
+      units: ['S', 'S'],
+    });
+    
+    expect(display2(-254623933.876)).toBe('-254.62S');
   });
 });

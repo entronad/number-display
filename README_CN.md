@@ -70,8 +70,9 @@ Number Display 的配置项，目前包括以下 5 个：
 - `decimal` ：最大小数位数。当空间不够时，实际小数位数会比这个值小，另外小数末尾的 0 会去掉.
 - `placeholder` ：当值为非法数字时输出的占位符。
 - `allowText` ：如果输入不是数字而是一段文本，是否原样输出。Dart 版无此参数。
-- `separator` ：是否显示逗号千位分隔符。千位分隔符的意义见 [这篇博客](https://www.zhangxinxu.com/wordpress/2017/09/web-page-comma-number/) 。
+- `separator` ：千位分隔符。千位分隔符的意义见 [这篇博客](https://www.zhangxinxu.com/wordpress/2017/09/web-page-comma-number/) 。
 - `roundingType` ：舍入规则，是四舍五入还是去位还是进位
+- `units` ：数值单位
 
 # 限长压缩原则
 

@@ -119,15 +119,21 @@ Allow *Text* ( String that cant convert to number) as input and result. It will 
 
 **separator**
 
-( default: true )
+( default: ',' )
 
-Whether the locale string has commas ( 1,234,222 ), if there are rooms.
+Set the locale string separators ( 1,234,222 ), if there are rooms. Set it to null if you don't need any. Only the first char is kept.
 
 **roundingType**
 
 ( default: 'round' )
 
 The rounding type when omitting decimals, enum in 'round', 'floor' or 'ceil'.
+
+**units**
+
+( default: ['k', 'M', 'G', 'T', 'P'] )
+
+The digit units to use. Only the first char is kept for each unit. If the property is set to null or too short, it will fallback to the default.
 
 ## Blogs
 

@@ -5,8 +5,9 @@
  * @param decimal - (Default equals length) Max decimal precision.
  * @param placeholder - (Default '') Result when neither number nor text.
  * @param allowText - (Default false) Allow text as results, if false text will convert to placeholder, text will be slice within length param.
- * @param separator - (Default true) Show commas between digits in group of 3, if there are rooms.
- * @param roundingType - (Derault 'round') Rounding type of decimals, enum in 'round', 'floor' or 'ceil'.
+ * @param {boolean} [separator] set separators between digits in group of 3, if there are rooms; default is ','
+ * @param {string} [roundingType] rounding type of decimals, enum in 'round', 'floor' or 'ceil'; default 'round'
+ * @param {Array<string>} [units] digital units, default is ['k', 'M', 'G', 'T', 'P']
  * 
  * @returns The display function.
  */
@@ -17,11 +18,13 @@ export default function createDisplay({
   allowText,
   separator,
   roundingType,
+  units,
 }?: {
   length?: number,
   decimal?: number,
   placeholder?: string,
   allowText?: boolean,
-  separator?: boolean,
+  separator?: string,
   roundingType?: 'round' | 'floor' | 'ceil',
+  units?: Array<string>,
 }): (value: any) => string;
