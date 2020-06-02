@@ -1,5 +1,11 @@
 ## 2.3.0
 
+**2020-06-02**
+
+- Make decimal point configurable.
+
+## 2.3.0
+
 **2020-03-12**
 
 - Make seporator and units configurable.
